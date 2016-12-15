@@ -7,18 +7,14 @@
 
 """
 Parameter definitions for the intersects module:
-
 A point is defined by a list or tuple in the form [x, y] or (x, y).
-
 A circle is defined as a list or tuple in the form [x, y, r] 
 where (x, y) represents the center of the circle and r is its radius.
-
 A rect is defined as a list or tuple in the form [x, y, width, height] 
 where (x, y) represents the coordinates of the upper left corner of 
 the rectangle.
 """
 
-import math
 
 def point_circle(point, circle):
     a = point[0] - circle[0]
@@ -31,12 +27,12 @@ def point_circle(point, circle):
 def point_rect(point, rect):
     x = point[0]
     y = point[1]
-
+    
     left = rect[0]
     right = rect[0] + rect[2]
     top = rect[1]
     bottom = rect[1] + rect[3]
-
+    
     return left <= x <= right and top <= y <= bottom
 
 
@@ -57,13 +53,9 @@ def rect_rect(rect1, rect2):
     left2 = rect2[0]
     right2 = rect2[0] + rect2[2]
     top2 = rect2[1]
-    bottom2 = rect2[1] + rect2[3]    
+    bottom2 = rect2[1] + rect2[3]
 
     return not (right1 <= left2 or
                 left1 >= right2 or
                 bottom1 <= top2 or
                 top1 >= bottom2)
-
-
-
-
