@@ -68,9 +68,10 @@ rd1=[300,150,125,25]
 rd2=[400,150,25,50]
 rd3=[300,150,25,50]
 rd4=[300,175,75,25]
-
-red_doors=[red_door1, red_door2, red_door4, red_door5, red_door6,rd1,rd2,rd3,rd4
-           ]
+rd5=[0,400,100,25]
+rd6=[0,500,100,25]
+red_doors=[red_door1, red_door2, red_door4, red_door5, red_door6,rd1,rd2,rd3,rd4,
+           rd5,rd6]
 #Meh walls
 meh_door2=[325,350,100,25]
 meh_door3=[425,350,100,25]
@@ -104,6 +105,11 @@ m28=[400,175,25,25]
 m29=[400,0,25,300]
 m30=[325,225,125,25]
 m31=[175,325,200,25]
+m32=[350,275,25,50]
+m33=[450,325,25,25]
+m34=[425,275,25,25]
+m35=[475,200,25,25]
+
 
 
 switchblueandmeh = [200,200,25,25]
@@ -111,7 +117,7 @@ switchblueandmeh = [200,200,25,25]
 wallmeh=[450,400,25,100]
 wall_meh=[wallmeh, meh_door2, meh_door3, meh_door4, md5, md6, md7, md8, m8, m9
           ,m10,m11, m12,m13,m14,m15,m16,m17,m18,m19,m20,m21,m22,m23
-          ,m24,m25,m26,m27,m28,m29,m30,m31]
+          ,m24,m25,m26,m27,m28,m29,m30,m31,m32,m33,m34,m35]
 
 #greem walls
 green_door1=[300,325,25,100]
@@ -124,19 +130,7 @@ rw1=[200,275,25,25]
 blue_walls=[rw1]
 
 
-wall20=[700,600,25,100]
 
-wall22=[400,375,25,100]
-wall23=[350,275,25,100]
-wall24=[75,300,100,25]
-wall25=[200,300,100,25]
-wall26=[300,350,25,100]
-wall27=[200,350,100,25]
-wall28=[300,400,25,100]
-wall29=[350,400,25,100]
-wall30=[325,500,25,25]
-wall31=[200,150,25,25]
-wall32=[125,350,51,25]
 
 gd1=[75,75,150,25]
 gd2=[75,75,25,125]
@@ -148,6 +142,7 @@ switchmeh=[375, 175,25,25]
 green_doors=[green_door, green_door1, green_door2, green_door3, green_door4,gd1,
              gd2,gd3,gd4]
 
+swon=[50,450,25,25]
 switchon= [350,400,25,25]
 switchoff=[125, 125,75, 75]
 walls = [wall1]
@@ -290,6 +285,23 @@ while not done:
             switch_off = False
             switch_meh = False
 
+        if intersects.rect_rect(player, swon):
+
+            red_doors_open = True
+            green_doors_open = False
+            wallmeh_open = False
+            blue_walls_open = False
+            collidables = [c for c in collidables if c not in green_doors]
+            collidables = [c for c in collidables if c not in wall_meh]
+            collidables = [c for c in collidables if c not in blue_walls]
+
+
+            collidables += red_doors
+            
+            switch_on = True
+            switch_off = False
+            switch_meh = False
+
         if intersects.rect_rect(player, switchblueandmeh):
             switch_on = False
             switch_off = False
@@ -356,6 +368,7 @@ while not done:
 
     pygame.draw.rect(screen, MEH, switchmeh)
     pygame.draw.rect(screen, GREEN, switchon)
+    pygame.draw.rect(screen, GREEN, swon)
     pygame.draw.rect(screen, YELLOW, switchoff)
 
     if red_doors_open:
